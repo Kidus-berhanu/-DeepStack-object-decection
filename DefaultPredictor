@@ -1,0 +1,58 @@
+import torch
+import torchvision
+from PIL import Image
+from torchvision import transforms
+from detectron2.engine import DefaultPredictor
+from detectron2.config import get_cfg
+from detectron2.data import MetadataCatalog
+
+# Function to load image and apply pre-processing transforms
+def load_image(img_path):
+    img = Image.open(img_path)
+    transform = transforms.Compose([transforms.ToTensor()])
+    img = transform(img)
+    return img
+
+# Function to perform object detection on image
+def detect_objects(img, cfg):
+    predictor = DefaultPredictor(cfg)
+    outputs = predictor(img)
+    return outputs
+
+# Function to visualize the object detection results
+def visualize_detections(img, outputs):
+    img = torchvision.transforms.ToPILImage()(img)
+    img.show()
+    classes = outputs["instances"].pred_classes
+    boxes = outputs["instances"].pred_boxes.tensor.detach().numpy()
+    for i in range(len(classes)):
+        class_name = MetadataCatalog.get("coco_2017_val").thing_classes[classes[i]]
+        box = boxes[i]
+        img.crop((box[0], box[1], box[2], box[3])).show(title=class_name)
+
+# Load image
+img_path = "path/to/image.jpg"
+img = load_image(img_path)
+
+# Create config and perform object detection
+cfg = get_cfg()
+cfg.merge_from_file("path/to/detectron2_config.yaml")
+outputs = detect_objects(img, cfg)
+
+# Visualize detections
+visualize_detections(img, outputs)
+def main():
+    # Load image
+    img_path = "path/to/image.jpg"
+    img = load_image(img_path)
+
+    # Create config and perform object detection
+    cfg = get_cfg()
+    cfg.merge_from_file("path/to/detectron2_config.yaml")
+    outputs = detect_objects(img, cfg)
+
+    # Visualize detections
+    visualize_detections(img, outputs)
+
+if __name__ == "__main__":
+    main()
