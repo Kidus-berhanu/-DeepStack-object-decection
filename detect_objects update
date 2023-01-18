@@ -1,0 +1,24 @@
+# Import the required libraries
+from PIL import Image
+import numpy as np
+
+# Function to detect objects in the output
+def detect_objects(output):
+    # Code to perform object detection using the output
+    # ...
+    # Return a list of detected objects
+    return objects
+
+# Load an image or video
+dark_image_or_video = Image.open("path/to/dark/image_or_video.jpg")
+
+# Preprocessing for image or video before passing through the model
+dark_image_or_video = np.array(dark_image_or_video)
+dark_image_or_video = dark_image_or_video / 255.0
+
+# Pass the image or video through the ExDARK model
+output = exdark_model.predict(dark_image_or_video)
+
+# Use the output to detect common objects
+objects = detect_objects(output)
+print(objects)
