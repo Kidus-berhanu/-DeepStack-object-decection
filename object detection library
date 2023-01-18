@@ -1,0 +1,24 @@
+import tensorflow as tf
+
+# Load a pre-trained model for object detection
+model = tf.keras.models.load_model("path/to/pre-trained/model")
+
+# Define the ExDARK modification to the model
+# This can involve adding layers or changing parameters
+# to improve performance on dark/night images and videos
+def exdark_modification(model):
+    # Add a dark image enhancement layer
+    model.add(tf.keras.layers.Brightness(0.5))
+    # Add a layer to improve visibility in low light
+    model.add(tf.keras.layers.Contrast(0.5))
+    return model
+
+# Apply the ExDARK modification to the model
+exdark_model = exdark_modification(model)
+
+# Test the ExDARK model on a dark/night image or video
+output = exdark_model.predict(dark_image_or_video)
+
+# Use the output to detect common objects
+objects = detect_objects(output)
+print(objects)
