@@ -1,6 +1,6 @@
 # -DeepStack-object-decection
 
-This repository provides a pre-trained object detection model that can be used to detect  common objects in dark/night images and videos.
+This repository provides a  object detection model that can be used to detect  common objects in dark/night images and videos.
 The model, called DeepStack, was trained on the ExDark dataset and is capable of detecting objects such as bicycles, boats, bottles, buses, chairs, cars, cats, cups, dogs, motorbikes, people, and tables.
 ![image](https://user-images.githubusercontent.com/107410165/212606805-e4d788e5-24d7-41df-aced-7e14b7cb3d05.png)
 
